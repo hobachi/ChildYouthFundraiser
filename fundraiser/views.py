@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.shortcuts import redirect
 
 # Create your views here.
-
 def getGoal(events) :
 	goal = 0
 	if events:

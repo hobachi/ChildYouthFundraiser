@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Task(models.Model):
+	event = models.CharField(max_length=100, default='General Event')
 	name = models.CharField(max_length=100)
 	description = models.CharField(max_length=300, default='No Description Available')
 	assignee =  models.CharField(max_length=20)
