@@ -5,6 +5,7 @@ from tasksapp.views import delete
 from tasksapp.views import search
 from django.utils import timezone
 from django.http import HttpRequest
+from django.test import SimpleTestCase
 
 
 # Create your tests here.
@@ -34,4 +35,19 @@ class TaskTestCase(TestCase):
         self.assertEqual(len(Task.objects.all()), 2)
         delete(request=None, taskId=task.id)
         self.assertEqual(len(Task.objects.all()), 1)
+        
+   
+class IndexTests(SimpleTestCase):
+    def test_index_page(self):
+        response = self.client.get('/')
+        self.assertEquals(response.status_code, 200)
+
+    def test_home_page_contains_correct_html(self):
+        response = self.client.get('/')
+        self.assertContains(response, '<h1 class="h2">Fundraising Tasks Management</h1>')
+
+    def test_about_page_does_not_contain_incorrect_html(self):
+        response = self.client.get('/')
+        self.assertNotContains(
+            response, 'Hi there! I should not be on the page.')     
 
